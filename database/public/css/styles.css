@@ -1,0 +1,224 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content styling */
+main {
+    flex-grow: 1; /* Membuat elemen ini mengisi ruang yang tersedia */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Container styling untuk kontainer umum */
+.container {
+    width: 100%;
+    max-width: 450px; /* Maksimum lebar 450px untuk kontainer umum */
+    margin: 0 auto; /* Memusatkan elemen */
+    padding: 30px; /* Menambah ruang di dalam */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Container styling untuk dashboard dan tiket */
+.dashboard-container, .ticket-container {
+    width: 100%; /* Lebar 100% agar menyesuaikan lebar kontainer induk */
+    max-width: 800px; /* Maksimum lebar 800px untuk dashboard dan tiket */
+    margin: 0 auto; /* Memusatkan elemen */
+    padding: 30px; /* Menambah ruang di dalam */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styling */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+h1, p {
+    margin-bottom: 10px;
+}
+
+/* Form elements */
+input, textarea, button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    resize: vertical;  /* Membatasi resize hanya ke bawah */
+    overflow: hidden;  /* Mencegah overflow ke kanan */
+}
+
+input, textarea {
+    border: 1px solid #ccc;
+}
+
+input:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Alert Styling */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.alert-danger ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.alert-danger li {
+    margin-bottom: 10px;
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard styling */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-info {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.user-info p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+/* Logout Button */
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+.logout-button:focus {
+    outline: none;
+}
+
+/* Header styling */
+header {
+    background-color: #007bff;
+    padding: 10px;
+    text-align: left;
+}
+
+header .logo {
+    text-align: left;
+    color: white;
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Ticket button */
+.ticket-button {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.ticket-button .btn-ticket {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ticket-button .btn-ticket:hover {
+    background-color: #0056b3;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
