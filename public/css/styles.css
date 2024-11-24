@@ -1,58 +1,144 @@
-/* Global reset */
+/* Global Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling */
+/* Base Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Container styling */
-.container, .dashboard-container, .ticket-container{
-    max-width: 450px;
-    margin: 100px auto;
+/* Layouts */
+main {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container, .register-container {
+    width: 25%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
     padding: 30px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h1 {
+    margin-bottom: 20px;
 }
 
 .dashboard-container {
-    max-width: 800px;
-    padding: 20px;
+    width: 90%;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-content {
+    margin: 0 auto; /* Center secara horizontal */
+    background-color: #fff;
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
 }
 
 .ticket-container {
-    max-width: 800px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-tickets {
+    max-width: 100%;
+}
+
+.user-tickets {
     padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ddd;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    /* Aktifkan scroll horizontal jika tabel terlalu lebar */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling untuk perangkat iOS */
+}
+
+.table {
+    width: 100%;
+    /* Pastikan tabel selalu menggunakan lebar penuh */
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background: #f9f9f9;
 }
 
 /* Heading Styling */
 h1 {
     text-align: center;
-    color: #333;
     margin-bottom: 20px;
     font-size: 2rem;
 }
 
-h1, p {
-    margin-bottom: 10px;
+h2, p {
+    margin:10px 0;
 }
 
 /* Form elements */
-input, textarea, button {
+input, textarea {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
     border-radius: 6px;
     box-sizing: border-box;
     margin-bottom: 20px;
-    resize: vertical;  /* Membatasi resize hanya ke bawah */
-    overflow: hidden;  /* Mencegah overflow ke kanan */
+    resize: vertical;
+    overflow: hidden;
 }
 
 input, textarea {
@@ -62,18 +148,6 @@ input, textarea {
 input:focus, textarea:focus {
     border-color: #007bff;
     outline: none;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
 }
 
 /* Alert Styling */
@@ -116,49 +190,129 @@ a:hover {
 }
 
 /* Dashboard styling */
-.dashboard-header {
+.dashboard-container h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    font-size: 2rem;
 }
 
+.welcome-message {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+/* User info styling */
 .user-info {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     padding: 20px;
     background-color: #fafafa;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.user-info p {
-    font-size: 1.1rem;
-    margin: 5px 0;
+.user-info h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
 }
 
-/* Logout Button */
-.logout-button {
-    background-color: #dc3545;
-    color: white;
+.user-info p {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Agar heading dan tombol sejajar secara vertikal */
+}
+
+.user-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Buttons */
+button {
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    padding: 12px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.logout-button {
+    all: unset;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .logout-button:hover {
     background-color: #c82333;
 }
 
-.logout-button:focus {
-    outline: none;
+.ticket-button a {
+    text-decoration: none;
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.ticket-button a:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-menu a, .dropdown-menu button {
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Agar heading dan tombol sejajar secara vertikal */
+    margin: 20px 0;
+}
+
+.ticket-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 /* Header styling */
 header {
-    background-color: #007bff;
-    padding: 10px;
+    background-color: #41a544;
+    padding: 10px 20px;
     text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header .logo h1 {
@@ -167,35 +321,437 @@ header .logo h1 {
     margin: 0;
 }
 
-/* Ticket button */
-.ticket-button {
-    margin-top: 30px;
+/* Styling for 'Masuk' and 'Daftar' in one line */
+.auth-links {
+    position: relative;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    all: unset;
+    /* Menghapus semua gaya bawaan browser */
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0;
+    border-radius: 5px;
+    display: block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu {
+    all: unset;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.logout-item {
+    all: unset;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    color: white;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.auth-links a {
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.login-link, .register-link {
+    background-color: #007bff;
+    color: #4CAF50;
+    text-decoration: none;
+    /* Menghapus underline jika ada */
+    font-weight: bold;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #41a544;
+    color: white;
+}
+
+/* Homepage Header Styles */
+.homepage-header {
+    background-color: #4CAF50;
+    color: #fff;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.homepage-header .logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.main-nav ul li {
+    position: relative;
+    display: flex;
+}
+
+.main-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+    border-radius: 4px;
+}
+
+.main-nav ul li a:hover {
+    background: #0056b3;
+    border-radius: 5px;
+}
+
+/* Intro Section */
+.intro {
+    background: url('https://images.unsplash.com/photo-1558005530-a7958896ec60?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.intro h2 {
+    font-size: 2.5em;
+    margin: 0 0 10px;
+}
+
+.intro p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* News Section */
+.news {
+    background: #fff;
+    padding: 40px 20px;
+    padding: 3% 15%;
+}
+
+.news h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.news-item {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.news-item h3 {
+    margin: 0 0 10px;
+}
+
+/* Styling untuk Kegiatan */
+.activities {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.activities h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    /* Agar grid terpusat secara horizontal */
+    max-width: 1200px;
+    /* Menambahkan batas lebar grid */
+    margin: 0 auto;
+    /* Agar grid berada di tengah */
+}
+
+/* Common Card Styles */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Untuk memastikan gambar tidak meluber */
+    text-align: center;
+    padding: 15px;
+}
+
+.activity-card img.activity-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    /* Agar gambar memenuhi area dengan proporsi yang tepat */
+    border-radius: 8px;
+}
+
+.activity-card h3 {
+    margin-top: 15px;
+    color: #333;
+}
+
+.activity-card p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 1rem;
+}
+
+
+/* Services Section */
+.services {
+    background: #f1f8e9;
+    padding: 40px 20px;
+    padding: 3% 15%;
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.service-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.ticket-button .btn-ticket {
-    padding: 12px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.service-item h3 {
+    margin-bottom: 10px;
 }
 
-.ticket-button .btn-ticket:hover {
-    background-color: #0056b3;
+.btn-secondary {
+    display: inline-flexbox;
+    background: #4CAF50;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #388e3c;
+}
+
+/* Contact Section */
+.contact-info {
+    padding: 40px 20px;
+    text-align: center;
+    background: #fff;
+    margin-top: 20px;
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+}
+
+/* Hamburger Menu Styles */
+.menu-toggle {
+    display: none;
+    /* Sembunyikan tombol hamburger di desktop */
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    /* Ukuran ikon hamburger */
+    color: #fff;
+    cursor: pointer;
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .container {
+@media (max-width: 1200px) {
+
+    /* Menyesuaikan layout pada layar besar seperti tablet */
+    .dashboard-container, .ticket-container {
         padding: 20px;
         margin: 20px;
     }
 
+    /* Menyesuaikan header pada layar lebih kecil */
+    header .logo h1 {
+        font-size: 20px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        /* Menu akan ditata vertikal di perangkat lebih kecil */
+        gap: 15px;
+    }
+
+    .main-nav ul li a {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    /* Pada ukuran layar tablet, kita buat beberapa elemen lebih kecil */
+    .intro h2 {
+        font-size: 2rem;
+        /* Mengurangi ukuran teks pada intro */
+    }
+
+    .intro p {
+        font-size: 1.1rem;
+    }
+
+    .news, .services {
+        padding: 20px 10px;
+        /* Menambahkan ruang lebih pada konten */
+    }
+
+    .news-grid, .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        /* Menyesuaikan jumlah kolom */
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 12px 20px;
+        /* Menyesuaikan tombol untuk layar lebih kecil */
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .dashboard-container, .ticket-container {
+        padding: 20px;
+    }
+
     h1 {
         font-size: 1.5rem;
+    }
+}
+
+/* Mobile Styles - Hamburger menu muncul */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        /* Tampilkan tombol hamburger hanya di mobile */
+    }
+
+    .main-nav {
+        display: none;
+        /* Sembunyikan menu pada mobile secara default */
+        flex-direction: column;
+        /* Menu akan tampil vertikal */
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    .main-nav.open {
+        display: flex;
+        /* Tampilkan menu saat tombol hamburger ditekan */
+    }
+
+    .main-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        /* Menampilkan menu secara vertikal */
+        gap: 10px;
+    }
+
+    .main-nav ul li a {
+        padding: 10px;
+        font-size: 18px;
+        /* Sesuaikan ukuran font untuk mobile */
+    }
+
+    .dashboard-content {
+        flex-direction: column;
+        /* Susun vertikal untuk layar kecil */
+    }
+
+    .user-info, .user-tickets {
+        max-width: 100%;
+        /* Lebar penuh untuk kolom */
+    }
+}
+
+/* Desktop Styles - Menu normal */
+@media (min-width: 769px) {
+    .main-nav {
+        display: flex;
+        /* Menampilkan menu horizontal pada desktop */
+        justify-content: flex-start;
+    }
+
+    .main-nav ul {
+        display: flex;
+        gap: 20px;
+    }
+
+    .main-nav ul li a {
+        font-size: 1rem;
+        /* Ukuran font yang pas di desktop */
+        padding: 10px;
     }
 }

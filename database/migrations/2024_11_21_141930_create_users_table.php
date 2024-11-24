@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
             $table->string('nik')->unique();    // NIK untuk login
             $table->string('password');         // Password hash
             $table->string('email')->nullable(); // Email (opsional)
-            $table->string('role');             // Role pengguna (admin/warga)
+            $table->string('role')->default('warga'); // Role pengguna (admin/warga)
             $table->string('nama_lengkap');     // Nama lengkap pengguna
             $table->timestamps();
         });

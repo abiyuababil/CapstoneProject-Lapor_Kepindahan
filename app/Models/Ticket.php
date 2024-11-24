@@ -2,22 +2,42 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Ticket extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'id_laporan';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    protected $fillable = [
-        'judul',
-        'deskripsi',
-        'user_id',
-    ];
-
-    // Relasi dengan user (jika diperlukan)
-    public function user()
+    protected static function boot()
     {
-        return $this->belongsTo(User::class);
+        parent::boot();
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+        });
     }
+    protected $table = 'tickets'; // Specify the table name
+    protected $fillable = [
+        'id_laporan',
+        'nama_lengkap',
+        'nik',
+        'tanggal_lahir',
+        'email',
+        'telepon',
+        'alamat_asal',
+        'alamat_tujuan',
+        'tanggal_pindah',
+        'alasan_pindah',
+        'jumlah_anggota_keluarga',
+        'jenis_kelamin',
+        'status_perkawinan',
+        'dokumen_pendukung',
+        'komentar',
+        'tanggal_laporan',
+        'status_laporan',
+    ];
 }

@@ -4,9 +4,9 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])
     ->name('login')
@@ -31,5 +31,11 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])
 Route::post('/register', [AuthController::class, 'register'])
     ->name('register.submit');
 
-    Route::get('/ticket/create', [TicketController::class, 'create'])->name('ticket.create');
-    Route::post('/ticket', [TicketController::class, 'store'])->name('ticket.store');
+// Rute untuk tiket pelaporan kepindahan
+Route::get('/ticket/create', [TicketController::class, 'create'])
+    ->name('ticket.create')
+    ->middleware('auth');
+
+Route::post('/ticket', [TicketController::class, 'store'])
+    ->name('ticket.store')
+    ->middleware('auth');
