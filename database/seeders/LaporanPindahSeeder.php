@@ -17,6 +17,7 @@ class LaporanPindahSeeder extends Seeder
     {
         DB::table('tickets')->insert([
             'id_laporan' => Str::uuid(),
+            'nama_pembuat' => 'Abiyu',
             'nama_lengkap' => 'Abiyu',
             'nik' => '3171040501021001',
             'tanggal_lahir' => '1990-12-15', // Sesuaikan tanggal lahir

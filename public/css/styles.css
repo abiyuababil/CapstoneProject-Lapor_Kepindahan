@@ -438,6 +438,43 @@ footer {
     border-radius: 5px;
 }
 
+.select-status {
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.select-status:hover {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+.select-status:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style for each option */
+.select-status option {
+    padding: 10px;
+}
+
+/* Option hover and selected states */
+.select-status option:hover {
+    background-color: #f0f8ff;
+    color: #007bff;
+}
+
+.select-status option:checked {
+    background-color: #007bff;
+    color: white;
+}
+
 /* Intro Section */
 .intro {
     background: url('https://images.unsplash.com/photo-1558005530-a7958896ec60?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;

@@ -12,12 +12,21 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'id_user' => 'Str::uuid()', // Generate a UUID
-            'nik' => '1234567890123456',
-            'password' => Hash::make('password123'),
-            'email' => 'example@example.com',
+            'id_user' => 'Str::uuid(1)', // Generate a UUID
+            'nik' => '0000000000000001',
+            'password' => Hash::make('123456'),
+            'email' => 'admin@example.com',
             'role' => 'admin',
-            'nama_lengkap' => 'John Doe',
+            'nama_lengkap' => 'Abiyu-admin',
+        ]);
+
+        User::create([
+            'id_user' => 'Str::uuid(2)', // Generate a UUID
+            'nik' => '0000000000000002',
+            'password' => Hash::make('123456'),
+            'email' => 'warga@example.com',
+            'role' => 'warga',
+            'nama_lengkap' => 'Abiyu-warga',
         ]);
     }
 }
