@@ -10,19 +10,34 @@ use Shuchkin\SimpleXLSX;
 class DashboardController extends Controller
 {
     // Di dalam DashboardController
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $isAdmin = $user->role === 'admin';  // Periksa apakah user adalah admin
         $isWarga = $user->role === 'warga';  // Periksa apakah user adalah warga
 
+        $tickets = Ticket::query();
+
         // Jika admin, tampilkan semua tiket
         if ($isAdmin) {
-            $tickets = Ticket::all();
+            // Admin bisa melihat semua tiket
         } else {
-            // Jika warga, hanya tampilkan tiket yang dibuat oleh mereka
-            $tickets = Ticket::where('nama_pembuat', $user->nama_lengkap)->get();
+            // Warga hanya bisa melihat tiket yang mereka buat
+            $tickets->where('nama_pembuat', $user->nama_lengkap);
         }
+
+        // Filter Tanggal Berdasarkan Jenis yang Dipilih
+        if ($request->filled('date_type') && $request->filled('start_date') && $request->filled('end_date')) {
+            $dateType = $request->input('date_type'); // 'created_at' atau 'tanggal_pindah'
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            $tickets = $tickets->whereBetween($dateType, [$startDate, $endDate]);
+        }
+
+
+        // Ambil hasil setelah semua filter diterapkan
+        $tickets = $tickets->get();
 
         return view('dashboard', compact('user', 'tickets', 'isAdmin', 'isWarga'));
     }
