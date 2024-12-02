@@ -39,7 +39,44 @@
                         </div>
                     @endif
                 </div>
+<!-- Filter berdasarkan Tanggal -->
+                <div class="filter-container">
+                    <form action="{{ route('dashboard') }}" method="GET">
+                        <div class="row">
+                            <!-- Pilih Jenis Tanggal -->
+                            <div class="col-md-4">
+                                <label for="date_type">Filter Berdasarkan:</label>
+                                <select name="date_type" id="date_type" class="form-control">
+                                    <option value="created_at" {{ request()->get('date_type') === 'created_at' ? 'selected' : '' }}>
+                                        Tanggal Dibuat
+                                    </option>
+                                    <option value="tanggal_pindah" {{ request()->get('date_type') === 'tanggal_pindah' ? 'selected' : '' }}>
+                                        Tanggal Pindah
+                                    </option>
+                                </select>
+                            </div>
 
+                            <!-- Input Range Tanggal -->
+                            <div class="col-md-4">
+                                <label for="start_date">Tanggal Mulai:</label>
+                                <input type="date" name="start_date" id="start_date" class="form-control"
+                                    value="{{ request()->get('start_date') }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="end_date">Tanggal Akhir:</label>
+                                <input type="date" name="end_date" id="end_date" class="form-control"
+                                    value="{{ request()->get('end_date') }}">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Cari</button>
+                                <a href="{{ route('dashboard') }}" class="btn btn-secondary">Reset</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 @if ($tickets->isEmpty())
                     <p>Belum ada tiket yang dibuat.</p>
                 @else
