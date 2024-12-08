@@ -635,6 +635,10 @@ footer {
     background: #388e3c;
 }
 
+.form-group-filter {
+    max-width: 20%;
+}
+
 /* Contact Section */
 .contact-info {
     padding: 40px 20px;

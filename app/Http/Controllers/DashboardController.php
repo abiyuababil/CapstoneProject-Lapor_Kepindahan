@@ -10,7 +10,7 @@ use Shuchkin\SimpleXLSX;
 class DashboardController extends Controller
 {
     // Di dalam DashboardController
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $isAdmin = $user->role === 'admin';  // Periksa apakah user adalah admin
@@ -18,10 +18,17 @@ class DashboardController extends Controller
 
         // Jika admin, tampilkan semua tiket
         if ($isAdmin) {
-            $tickets = Ticket::all();
+            $tickets = Ticket::get();
         } else {
             // Jika warga, hanya tampilkan tiket yang dibuat oleh mereka
             $tickets = Ticket::where('nama_pembuat', $user->nama_lengkap)->get();
+        }
+
+        // Filter berdasarkan tanggal pindah jika ada
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $start_date = $request->get('start_date');
+            $end_date = $request->get('end_date');
+            $tickets = $tickets->whereBetween('tanggal_pindah', [$start_date, $end_date]);
         }
 
         return view('dashboard', compact('user', 'tickets', 'isAdmin', 'isWarga'));
@@ -29,11 +36,17 @@ class DashboardController extends Controller
     public function exportData($type)
     {
         $user = Auth::user();
-        $tickets = Ticket::where('nama_pembuat', $user->nama_lengkap)->get();
+
+        // Filter data berdasarkan role pengguna
+        if ($user->role === 'admin') {
+            // Admin dapat melihat semua tiket
+            $tickets = Ticket::get();
+        } else {
+            // Warga hanya dapat melihat tiket yang mereka buat
+            $tickets = Ticket::where('nama_pembuat', $user->nama_lengkap)->get();
+        }
 
         if ($type === 'excel') {
-            // Ekspor ke Excel menggunakan Simple Excel
-
             // Membuat data array untuk Excel
             $data = [
                 ['Nama Lengkap', 'NIK', 'No Telepon', 'Tanggal Pindah', 'Alamat Asal', 'Alamat Tujuan', 'Status'] // Header
@@ -52,14 +65,10 @@ class DashboardController extends Controller
                 ];
             }
 
-            // Menyimpan data ke dalam file Excel
             $xlsx = new SimpleXLSX();
             $xlsx->addSheet($data);
-
-            // Nama file Excel
             $fileName = 'tickets.xlsx';
 
-            // Menyimpan dan mendownload file Excel
             return response()->stream(
                 function () use ($xlsx) {
                     echo $xlsx->save();
@@ -67,13 +76,13 @@ class DashboardController extends Controller
                 200,
                 [
                     'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                    'Content-Disposition' => 'attachment; filename="tickets.xlsx"',
+                    'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
                 ]
             );
         } elseif ($type === 'pdf') {
             // Ekspor ke PDF
-            $pdf = Pdf::loadView('exports.tickets_pdf', compact('tickets'));
-            return $pdf->stream('tickets.pdf'); // Menampilkan PDF di browser
+            $pdf = Pdf::loadView('exports.tickets_pdf', compact('tickets', 'user'));
+            return $pdf->stream('tickets.pdf');
         } else {
             return redirect()->back()->with('error', 'Format tidak didukung!');
         }

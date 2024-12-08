@@ -39,6 +39,19 @@
                         </div>
                     @endif
                 </div>
+                <h3>Filter Tanggal Pindah</h3>
+                <!-- Form untuk filter tanggal -->
+                <form action="{{ route('dashboard') }}" method="GET" class="form-inline">
+                    <div class="form-group-filter">
+                        <input type="date" name="start_date" id="start_date" class="form-control"
+                            value="{{ request('start_date') }}">
+                        <input type="date" name="end_date" id="end_date" class="form-control"
+                            value="{{ request('end_date') }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Clear</a>
+                </form>
+
 
                 @if ($tickets->isEmpty())
                     <p>Belum ada tiket yang dibuat.</p>

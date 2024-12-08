@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Kepindahan Yang Telah Dibuat</title>
+    <title>Data Laporan Kepindahan</title>
     <style>
         table {
             width: 100%;
@@ -30,10 +30,21 @@
     </style>
 </head>
 <body>
-    <h2>Data Tiket</h2>
+    <h1>Data Laporan Kepindahan</h1>
+    <p><strong>Diunduh oleh:</strong> {{ $user->nama_lengkap }} ({{ $user->role }})</p>
+
+    @if ($user->role === 'admin')
+        <p>Berikut adalah semua laporan kepindahan yang telah tercatat di sistem.</p>
+    @else
+        <p>Berikut adalah laporan kepindahan yang telah Anda buat.</p>
+    @endif
+
     <table>
         <thead>
             <tr>
+                @if ($user->role === 'admin')
+                    <th>Nama Pembuat</th>
+                @endif
                 <th>Nama Lengkap</th>
                 <th>NIK</th>
                 <th>No Telepon</th>
@@ -46,12 +57,15 @@
         <tbody>
             @foreach ($tickets as $ticket)
                 <tr>
+                    @if ($user->role === 'admin')
+                        <td>{{ $ticket->nama_pembuat }}</td>
+                    @endif
                     <td>{{ $ticket->nama_lengkap }}</td>
                     <td>{{ $ticket->nik }}</td>
                     <td>{{ $ticket->telepon }}</td>
                     <td>{{ \Carbon\Carbon::parse($ticket->tanggal_pindah)->format('d M Y') }}</td>
-                    <td class="alamat">{{ $ticket->alamat_asal }}</td>
-                    <td class="alamat-tujuan">{{ $ticket->alamat_tujuan }}</td>
+                    <td>{{ $ticket->alamat_asal }}</td>
+                    <td>{{ $ticket->alamat_tujuan }}</td>
                     <td>{{ $ticket->status_laporan }}</td>
                 </tr>
             @endforeach
