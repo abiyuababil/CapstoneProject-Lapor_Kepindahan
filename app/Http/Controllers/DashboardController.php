@@ -16,23 +16,19 @@ class DashboardController extends Controller
         $isAdmin = $user->role === 'admin';  // Periksa apakah user adalah admin
         $isWarga = $user->role === 'warga';  // Periksa apakah user adalah warga
 
-        $tickets = Ticket::query();
-
         // Jika admin, tampilkan semua tiket
         if ($isAdmin) {
-            $tickets = Ticket::all();
+            $tickets = Ticket::get();
         } else {
-            // Warga hanya bisa melihat tiket yang mereka buat
-            $tickets->where('nama_pembuat', $user->nama_lengkap);
+            // Jika warga, hanya tampilkan tiket yang dibuat oleh mereka
+            $tickets = Ticket::where('nama_pembuat', $user->nama_lengkap)->get();
         }
 
-        // Filter Tanggal Berdasarkan Jenis yang Dipilih
-        if ($request->filled('date_type') && $request->filled('start_date') && $request->filled('end_date')) {
-            $dateType = $request->input('date_type'); // 'created_at' atau 'tanggal_pindah'
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
-
-            $tickets = $tickets->whereBetween($dateType, [$startDate, $endDate]);
+        // Filter berdasarkan tanggal pindah jika ada
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $start_date = $request->get('start_date');
+            $end_date = $request->get('end_date');
+            $tickets = $tickets->whereBetween('tanggal_pindah', [$start_date, $end_date]);
         }
 
         return view('dashboard', compact('user', 'tickets', 'isAdmin', 'isWarga'));
